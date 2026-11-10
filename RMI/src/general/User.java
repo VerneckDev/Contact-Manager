@@ -1,22 +1,81 @@
 package general;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-
-public class Server
+public class User implements Serializable 
 {
-	public static void main(String[] args)
+	private String name;
+	private String pass; 
+	private String mail;
+	private List<Contatos> contatos;
+	
+	public String getName()
 	{
-		try 
+		return name;
+	}
+	
+	public String getPass()
+	{
+		return pass;
+	}
+	
+	public String getMail()
+	{
+		return mail;
+	}
+	
+	public List<Contatos> getContatos()
+	{
+		return(contatos);
+	}
+	
+	public Contatos getConName(String name)
+	{
+		for(Contatos contato: contatos)
 		{
-			Interface inter= new Implement();//Creates a inter with the functions on the implement
-			Registry registry =LocateRegistry.createRegistry(1099);//defines a object registry and where it is going to be 
-			registry.rebind("houseWife", inter);//name of the file that the object inter will be
-			System.out.println("Server ready");//message sent to tell that the server is ready
+			if(contato.getName().equals(name))
+			{
+				return contato;
+			}
 		}
-		catch(Exception e)
+		return null;
+	}
+	public Contatos getConNumber(String number)
+	{
+		for(Contatos contato: contatos)
 		{
-			e.printStackTrace();
+			if(contato.getCel()==Integer.parseInt(number))
+			{
+				return contato;
+			}
 		}
+		return null;
+	}
+	
+	
+	public void addContato(Contatos contato) 
+	{
+	    contatos.add(contato);
+	}
+
+	
+	public void removeContato(Contatos contato)
+	{
+		contatos.remove(contato);
+	}
+	
+	
+	
+
+
+	
+	public User(String name, String pass, String mail)
+	{
+		this.name=name;
+		this.pass=pass;
+		this.mail=mail;
+		this.contatos=new ArrayList<>();
 	}
 }
+

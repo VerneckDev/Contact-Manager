@@ -1,54 +1,22 @@
 package general;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
-public class RegUser implements Serializable
+public class Server
 {
-	
-	private List<User>users;
-	
-	public void addUser(User user)
+	public static void main(String[] args)
 	{
-		users.add(user);
-	}
-	
-	public void removeUser(User user)
-	{
-		users.remove(user);
-	}
-	
-	public User getName(String name) 
-	{
-        for (User user : users) 
-        {
-            if (user.getName().equals(name))
-            {
-                return user;
-            }
-        }
-        return null;
-	}
-	public User getMail(String mail)
-	{
-		for(User user:users)
+		try 
 		{
-			if(user.getMail().equals(mail))
-			{
-				return user;
-			}
+			Interface inter= new Implement();//Creates a inter with the functions on the implement
+			Registry registry =LocateRegistry.createRegistry(1099);//defines a object registry and where it is going to be 
+			registry.rebind("houseWife", inter);//name of the file that the object inter will be
+			System.out.println("Server ready");//message sent to tell that the server is ready
 		}
-		return null;
-	}
-	
-	public List<User>getUsers()
-	{
-		return users;
-	}
-	
-	public RegUser()
-	{
-		this.users=new ArrayList<>();
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

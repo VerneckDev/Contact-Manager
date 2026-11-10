@@ -1,18 +1,54 @@
 package general;
 
-import java.rmi.Remote;
-import java.rmi.RemoteException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-public interface Interface extends Remote
+public class RegUser implements Serializable
 {
-	String New (String name,String pass, String mail) throws RemoteException;//defines what function will used on the server machine (In the future will have things to check if the information in valid)
-	String Check(String name,String pass) throws RemoteException;
-	List<Contatos> List(String name)throws RemoteException;
-	String Add(String username, String name, String number)throws RemoteException;
-	String Remove(String username, String number)throws RemoteException;
-
+	
+	private List<User>users;
+	
+	public void addUser(User user)
+	{
+		users.add(user);
+	}
+	
+	public void removeUser(User user)
+	{
+		users.remove(user);
+	}
+	
+	public User getName(String name) 
+	{
+        for (User user : users) 
+        {
+            if (user.getName().equals(name))
+            {
+                return user;
+            }
+        }
+        return null;
+	}
+	public User getMail(String mail)
+	{
+		for(User user:users)
+		{
+			if(user.getMail().equals(mail))
+			{
+				return user;
+			}
+		}
+		return null;
+	}
+	
+	public List<User>getUsers()
+	{
+		return users;
+	}
+	
+	public RegUser()
+	{
+		this.users=new ArrayList<>();
+	}
 }

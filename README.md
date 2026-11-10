@@ -23,8 +23,6 @@ Built with **Java Sockets** (TCP) on port `3333`. The client and server exchange
 
 See each project's own README for setup instructions and implementation details.
 
-> **Note:** in both projects, the `.java` files in this repository currently don't hold the classes their names suggest, and some classes are missing, so neither project compiles as-is. See *Notes & Known Limitations* in each project's README.
-
 ---
 
 ## Authors

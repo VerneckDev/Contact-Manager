@@ -114,4 +114,3 @@ java -cp out general.Client
 - Passwords are stored in **plain text** — not suitable for production use.
 - The client always connects to **`localhost`**.
 - If `users.data` is corrupted or missing, the server automatically starts with an empty user registry.
-- **The files in `src/general/` currently don't match their contents:** each file holds the class that belongs to the previous name in alphabetical order (`Contatos.java` contains `Client`, `FileMnager.java` contains `Contatos`, …, `User.java` contains `Server`), there is no `Client.java`, and the `User` class is missing. Until the files are restored, the compile commands above fail.
