@@ -8,8 +8,8 @@ A client-server contact management application built with **Java RMI** (Remote M
  
 ```
 src/
-├──module-info.java   — Java module descriptor (exports general, requires java.rmi)
-├──general/
+├── module-info.java   — Java module descriptor (module TheServer: exports general, requires java.rmi)
+└── general/
     ├── Server.java        — Starts the RMI registry and exposes the remote object
     ├── Client.java        — Terminal UI; connects to the server and handles user input
     ├── Interface.java     — RMI remote interface (defines available remote methods)
@@ -17,7 +17,7 @@ src/
     ├── User.java          — Represents a registered user (name, password, email, contacts)
     ├── Contatos.java      — Represents a single contact (name + phone number)
     ├── RegUser.java       — Registry/collection of all users
-    ├── FileMnager.java    — Handles serialization: saves and loads user data from disk
+    └── FileMnager.java    — Handles serialization: saves and loads user data from disk
 ```
  
 ---
@@ -34,17 +34,20 @@ User data is persisted in a file called `users.data` (Java serialization), so re
  
 ### Prerequisites
 - Java 11 or later
-- Both files compiled into the same module/package (`general`)
+- All source files compiled into the same package (`general`)
+
 ### 1. Compile
  
+From the `RMI/` folder:
+ 
 ```bash
-javac -d out --module-source-path src -m TheServer
+javac -d out src/module-info.java src/general/*.java
 ```
  
 Or, if compiling without modules:
  
 ```bash
-javac general/*.java
+javac -d out src/general/*.java
 ```
  
 ### 2. Start the Server
@@ -71,11 +74,11 @@ java -cp out general.Client
 ### Main Menu (unauthenticated)
 ```
 ╔═══════════════════════════════╗
-║        Contact Admin          ║
+║         Contact Admin         ║
 ║                               ║
-║         [1] Login             ║
-║         [2] Register          ║
-║         [3] Exit              ║
+║          [1] Login            ║
+║          [2] Register         ║
+║          [3] Exit             ║
 ║                               ║
 ╚═══════════════════════════════╝
 ```
@@ -83,12 +86,12 @@ java -cp out general.Client
 ### Contact Menu (after login)
 ```
 ╔═══════════════════════════════╗
-║        Contact Admin          ║
+║         Contact Admin         ║
 ║                               ║
-║    [1] List of Contacts       ║
-║    [2] Insert Contact         ║
-║    [3] Remove Contact         ║
-║    [4] Exit                   ║
+║      [1] List of Contacts     ║
+║      [2] Insert Contact       ║
+║      [3] Remove Contact       ║
+║      [4] Exit                 ║
 ║                               ║
 ╚═══════════════════════════════╝
 ```
@@ -111,3 +114,4 @@ java -cp out general.Client
 - Passwords are stored in **plain text** — not suitable for production use.
 - The client always connects to **`localhost`**.
 - If `users.data` is corrupted or missing, the server automatically starts with an empty user registry.
+- **The files in `src/general/` currently don't match their contents:** each file holds the class that belongs to the previous name in alphabetical order (`Contatos.java` contains `Client`, `FileMnager.java` contains `Contatos`, …, `User.java` contains `Server`), there is no `Client.java`, and the `User` class is missing. Until the files are restored, the compile commands above fail.

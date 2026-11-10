@@ -16,12 +16,14 @@ Built with **Java Sockets** (TCP) on port `3333`. The client and server exchange
 
 ## Shared Features
 
-- Register / Login with username, password, and email
+- Register (username, password, and email) and log in (username and password)
 - List, add, and remove contacts (9-digit phone numbers)
 - Server-side data persistence
 - Simple terminal UI with boxed menus
 
 See each project's own README for setup instructions and implementation details.
+
+> **Note:** in both projects, the `.java` files in this repository currently don't hold the classes their names suggest, and some classes are missing, so neither project compiles as-is. See *Notes & Known Limitations* in each project's README.
 
 ---
 
@@ -29,4 +31,4 @@ See each project's own README for setup instructions and implementation details.
 
 **João Pedro Verneck** — [@VerneckDev](https://github.com/VerneckDev)
 
-**João Vitor Andrade** — [@Jonhi7139 ](https://github.com/Jonhi7139 )
+**João Vitor Andrade** — [@Jonhi7139](https://github.com/Jonhi7139)
